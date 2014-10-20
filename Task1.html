@@ -1,0 +1,269 @@
+<!doctype html>
+<head>
+	<meta charset="utf-8" />
+	<style>
+	
+		/*Для второго примера*/
+		.overlay {
+			background-color: rgba(0, 0, 0, 0.7);
+			bottom: 0;
+			cursor: default;
+			left: 0;
+			opacity: 0;
+			position: fixed;
+			right: 0;
+			top: 0;
+			visibility: hidden;
+			z-index: 99999;
+				-webkit-transition: opacity .5s;
+				-moz-transition: opacity .5s;
+				-ms-transition: opacity .5s;
+				-o-transition: opacity .5s;
+				transition: opacity .5s;
+		}
+		.popup {
+			background-color: #fff;
+			border: 3px solid #fff;
+			display: inline-block;
+			left: 50%;
+			opacity: 1;
+			padding: 15px;
+			width: 500px;
+			min-height: 323px;
+			position: fixed;
+			text-align: justify;
+			top: 40%;
+			visibility: hidden;
+			z-index: 999999;
+			-webkit-transform: translate(-50%, -50%);
+			-moz-transform: translate(-50%, -50%);
+			-ms-transform: translate(-50%, -50%);
+			-o-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+			-webkit-transition: opacity .5s, top .5s;
+			-moz-transition: opacity .5s, top .5s;
+			-ms-transition: opacity .5s, top .5s;
+			-o-transition: opacity .5s, top .5s;
+			transition: opacity .5s, top .5s;
+			border-radius: 11px;
+		}
+		.popup .close_order {
+			font-size: 13px;
+			display: block;
+			width: 6px;
+			height: 17px;
+			position: absolute;
+			padding: 1px 9px 4px 9px;
+			top: -15px;
+			right: -15px;
+			cursor: pointer;
+			color: #fff;
+			font-family: 'tahoma', sans-serif;
+			background: -webkit-gradient(linear, left top, right top, from(#3d51c8), to(#051fb8));
+			background: -webkit-linear-gradient(top, #3d51c8, #051fb8);
+			background: -moz-linear-gradient(top, #3d51c8, #051fb8);
+			background: -o-linear-gradient(top, #3d51c8, #051fb8);
+			background: -ms-linear-gradient(top, #3d51c8, #051fb8);
+			background: linear-gradient(top, #3d51c8, #051fb8);
+			background-color: #3d51c8;
+			border: 1px solid #061fb8;
+			-webkit-border-radius: 50%;
+			-moz-border-radius: 50%;
+			-o-border-radius: 50%;
+			-ms-border-radius: 50%;
+			border-radius: 50%;
+			text-align: center;
+			box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.5);
+		}
+		.popup .close_order:hover {
+			background: -webkit-gradient(linear, left top, right top, from(#051fb8), to(#3d51c8));
+			background: -webkit-linear-gradient(top, #051fb8, #3d51c8);
+			background: -moz-linear-gradient(top, #ff5f0, #3d51c87);
+			background: -o-linear-gradient(top, #051fb8, #3d51c8);
+			background: -ms-linear-gradient(top, #051fb8, #3d51c8);
+			background: linear-gradient(top, #051fb8, #3d51c8);
+			background-color: #051fb8;
+			border: 1px solid #00385E;
+		}
+		.popup .close_order:active {
+			background: #8f9be0;
+		}
+		
+		/*Для третьего примера*/
+		
+		.popup__overlay {
+			display: none;
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0,0,0,.7);
+			text-align: center
+			}
+			.popup__overlay:after {
+				display: inline-block;
+				height: 100%;
+				width: 0;
+				vertical-align: middle;
+				content: ''
+			}
+		.popup__2 {
+			display: inline-block;
+			position: relative;
+			max-width: 60%;
+			padding: 20px;
+			border-radius: 15px;
+			background: #fff;
+			vertical-align: middle
+			}
+
+		.popup__close {
+			display: block;
+			position: absolute;
+			top: -20px;
+			right: 10px;
+			width: 12px;
+			height: 12px;
+			padding: 8px;
+			border-radius: 50%;
+			cursor: pointer;
+			background: #FD6969;
+			text-align: center;
+			font-size: 12px;
+			line-height: 12px;
+			color: #444;
+			text-decoration: none;
+			font-weight: bold
+			}
+		.popup__close:hover {
+				background: #ddd
+        }
+		
+	</style>
+	
+	<script type="text/javascript" src="http://yandex.st/jquery/1.7.1/jquery.min.js" ></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			//Для второго примера
+			$('.popup .close_order, .overlay').click(function (){
+				$('.popup, .overlay').css('opacity','0');
+				$('.popup, .overlay').css('visibility','hidden');
+			});
+			$('a.clickMe').click(function (e){
+				$('.popup, .overlay').css('opacity','1');
+				$('.popup, .overlay').css('visibility','visible');
+				e.preventDefault();
+			});
+			$('a.clickMe2').click(function (e){
+				$('.popup, .overlay').show();
+				e.preventDefault();
+			});
+			
+			
+			//Для третьего примера
+			p = $('.popup__overlay');
+			var close_type = 0;
+			
+			$('#popup__toggle').click(function() {
+				$("div.popup__2 p.text").html("В этом примере попап вызывается специальным методом для css в juery: css('display', 'block')");
+				close_type = 0;
+				p.css('display', 'block')
+			})
+			
+			$('#popup__toggle_show').click(function() {
+				$("div.popup__2 p.text").html("В этом примере попап вызывается методом специальным juery: show()");
+				close_type = 1;
+				p.show(100);
+			})
+
+			$('#popup__toggle_slideDown').click(function() {
+				$("div.popup__2 p.text").html("В этом примере попап вызывается методом специальным juery: slideDown(). Но у него так же есть и своя <strike>бага</strike> фишка, слайдом выводится не только попап, но и его фон, потому что реализация у нас такая, что мы отображаем фон в котором попап уже отображен");
+				close_type = 2;
+				p.slideDown();
+			})
+
+			$('#popup__toggle_fadeIn').click(function() {
+				$("div.popup__2 p.text").html("В этом примере попап вызывается методом специальным juery: fadeIn().");
+				close_type = 3;
+				p.fadeIn();
+			})
+			
+			function popup_close(p,close_type)
+			{
+				switch(close_type)
+				{
+				case 0:p.css('display', 'none');
+					break;
+				case 1:p.hide(100);
+					break;
+				case 2:p.slideUp();
+					break;
+				case 3:p.fadeOut();
+					break;
+				}
+			}
+			
+			p.click(function(event) {
+				e = event || window.event
+				if (e.target == this) {
+					popup_close(p, close_type);
+				}
+			})
+			
+			$('.popup__close').click(function() {
+				popup_close(p, close_type);
+			})
+			
+		});
+		
+	</script>
+</head>
+<body>
+<h1>Всплывающие окна</h1>
+
+<div class="overlay" title="окно"></div>
+
+<div class="popup">
+<div class="close_order">x</div>
+	<p>Данное всплывающее окно выведенно с помощью библиотеки Jquery с фиксированными размерами и процентным отступом от верха экрана.</p>
+	<p>Такой способ мне нравится больше всего, потому что с ним меньше всего проблем при масшабировании, изменения размеров окна браузера и выводе на мобильных устройствах.</p>
+	<p>Однако при небольшой высоте экрана он просто уйдет выше видимой области и с ним будет проблематично или невозможно работать. Такое может произойти, например, от большого окличества контента. На этот случай максимальный размер попапа можно ограничить и включить скроллинг внутри области.</p>
+	<p>Но он выводится с помощью изменения атрибута CSS Opacity</p>
+	<p>И выводится с помощью прямого изменения атрибутов CSS: opacity и visibility</p>
+</div>
+
+
+
+<div class="popup__overlay">
+    <div class="popup__2">
+        <a href="#" class="popup__close">X</a>
+		<p>Этот попап отображается с помощью атрибута CSS: display или через специальные методы Jquery, и отображаем не сам попап а его слой, что удобно лишь в том случае если есть один попап и один слой.</p>
+		<p>А за счет того что он отображется внутри тега слоя, а не просто за за ним и поверх него, то с помощью css vertical-align и text-align очень просто настроить его точно по центру и при любых размерах окна браузера.</p>
+		<p>Так же можно отображать попапы в этом слою дополнительно. В таком случае их можно даже группировать по функционалу, внешнему виду слоев и т.д.</p>
+		
+		<p class="text"></div>
+    </div>
+</div>
+
+
+<ul>
+	<li><a href="#" onclick="javascript: alert('Конечно же это алерт! Очень прост и всегда срабатывает на 100% (если пользователь не нажал галочку скрывать алерты на этой странице). Жалко только, что его нельзя делать по центру.'); return false;">Самое простое всплывающее окно</a></li>
+	<li><a class="clickMe" href="#">Второй пример</a></li>
+	<li><a id="popup__toggle" href="#">Третий пример CSS Display</a></li>
+	<li><a id="popup__toggle_show" href="#">Четрвертый пример Jquery show</a></li>
+	<li><a id="popup__toggle_slideDown" href="#">Пятый пример Jquery slideDown</a></li>
+	<li><a id="popup__toggle_fadeIn" href="#">Шестой пример Jquery fadeIn</a></li>
+</ul>	
+
+<p>
+	Так же в окнах не написано, что на один затемненый слой может быть несколько окошек, которые могут быть как внутри этих блоков, так и отдельно. И отсутп можно делать в пикселях, но тогда окно будет по центру вообще только при определенных размерах окна браузера.
+</p>
+
+<p>
+	Способов много и тут далеко не все, самое главное среди всех способов - это следить, чтобы попап при специфичных размерах окна не вылазил за его пределы, можно даже адаптивную верстку сделать к нему, если окно совсем маленькое.
+</p>
+
+</body>
+</html>
